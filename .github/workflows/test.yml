@@ -13,5 +13,9 @@ jobs:
         install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - run: chmod +x build_web.sh
-    - run: nix develop -c './build_web.sh'
+    - run: nix build .#game-of-life-web
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./result
