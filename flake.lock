@@ -83,7 +83,7 @@
         "nixpkgs": "nixpkgs_2",
         "rust-overlay": "rust-overlay",
         "utils": "utils",
-        "wasm-bindgen-legacy": "wasm-bindgen-legacy"
+        "wasm-bindgen-269": "wasm-bindgen-269"
       }
     },
     "rust-overlay": {
@@ -120,7 +120,7 @@
         "type": "github"
       }
     },
-    "wasm-bindgen-legacy": {
+    "wasm-bindgen-269": {
       "locked": {
         "lastModified": 1611047785,
         "narHash": "sha256-Xmi16YLEWeDUF/EmUVdCUNmL2uD22fCoHKj29ZHjlbY=",
