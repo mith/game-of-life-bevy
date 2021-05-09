@@ -13,5 +13,6 @@ jobs:
         install_options: '--tarball-url-prefix https://nixos-nix-install-tests.cachix.org/serve'
         extra_nix_config: |
           experimental-features = nix-command flakes
-    - run: nix build
-    - run: nix flake check
+    - run: nix develop
+    - run: cargo build --target "wasm32-unknown-unknown" --features web
+    - run: wasm-bindgen --out-dir target --out-name wasm --target web --no-typescript target/wasm32-unknown-unknown/debug/game-of-life-bevy.wasm
