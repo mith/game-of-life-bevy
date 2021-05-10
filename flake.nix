@@ -71,6 +71,7 @@
                   mkdir -p $out
                   wasm-bindgen --out-dir $out --out-name wasm --target web --no-typescript ${game-of-life-wasm}/bin/game-of-life-bevy.wasm
                   cp index.html $out/index.html
+                  cp -r assets $out/assets
                 '';
               };
           };
