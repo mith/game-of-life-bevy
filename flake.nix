@@ -55,7 +55,6 @@
             game-of-life-web =
               let
                 game-of-life-wasm = (game-of-life.overrideAttrs (attrs: {
-                  cargo_build_options = attrs.cargo_build_options ++ [ "--features web" ];
                   CARGO_BUILD_TARGET = "wasm32-unknown-unknown";
                 }));
               in
@@ -64,7 +63,6 @@
                 src = ./.;
                 nativeBuildInputs = with pkgs; [
                   wasm-bindgen-cli
-                  game-of-life-wasm
                 ];
                 phases = [ "unpackPhase" "installPhase" ];
                 installPhase = ''
