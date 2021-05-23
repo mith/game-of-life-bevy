@@ -144,7 +144,7 @@ fn main() {
 }
 
 fn load_board(mut state: ResMut<BoardState>, asset_server: Res<AssetServer>) {
-    state.handle = asset_server.load("patterns/queenbeeloop.rle");
+    state.handle = asset_server.load("patterns/p124.rle");
     dbg!("loading board");
 }
 
@@ -181,7 +181,7 @@ fn setup_board(
     let height = a.ncols();
 
     let texture = textures.add(Texture::new_fill(
-        bevy::render::texture::Extent3d::new(width as u32, height as u32, 1u32),
+        bevy::render::texture::Extent3d::new(height as u32, width as u32, 1u32),
         bevy::render::texture::TextureDimension::D2,
         &[0u8, 0u8, 0u8, 255u8],
         bevy::render::texture::TextureFormat::Rgba8UnormSrgb,
