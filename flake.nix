@@ -10,11 +10,7 @@
   outputs = { self, nixpkgs, utils, rust-overlay, naersk, wasm-bindgen-269, ... }:
     utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
-        rust-nightly = pkgs.rust-bin.nightly.latest.default.override {
-          extensions = [ "rust-src" ];
-          targets = [ "wasm32-unknown-unknown" ];
-        };
-        rust-stable = pkgs.rust-bin.nightly.latest.default.override {
+        rust = pkgs.rust-bin.nightly.latest.default.override {
           extensions = [ "rust-src" ];
           targets = [ "wasm32-unknown-unknown" ];
         };
@@ -23,32 +19,34 @@
           overlays = [
             rust-overlay.overlay
             (self: super: {
-              rustc = rust-stable;
-              cargo = rust-stable;
+              rustc = rust;
+              cargo = rust;
               wasm-bindgen-cli = (import wasm-bindgen-269 { inherit system; }).wasm-bindgen-cli;
             })
           ];
         };
         naersk-lib = naersk.lib."${system}".override {
-          cargo = rust-nightly;
-          rustc = rust-stable;
+          cargo = rust;
+          rustc = rust;
         };
       in
       rec {
         packages =
           rec {
             game-of-life = naersk-lib.buildPackage {
-              pname = "game-of-life";
+              pname = "game-of-life-bevy";
               root = ./.;
               nativeBuildInputs = with pkgs; [
                 pkg-config
+              ];
+              buildInputs = with pkgs; [
                 alsaLib
                 libudev
                 xorg.libX11
-                xlibs.libX11
-                xlibs.libXcursor
-                xlibs.libXi
-                xlibs.libXrandr
+                xorg.libX11
+                xorg.libXcursor
+                xorg.libXi
+                xorg.libXrandr
                 python3
               ];
             };
