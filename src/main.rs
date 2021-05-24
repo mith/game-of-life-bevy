@@ -140,6 +140,7 @@ fn main() {
         .add_startup_system(load_board.system())
         .add_system(grid_system.system())
         .add_system(setup_board.system())
+        .insert_resource(ClearColor(Color::WHITE))
         .run();
 }
 
